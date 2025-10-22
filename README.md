@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1081339126.svg)](https://doi.org/10.5281/zenodo.17418532)
+
 <p align="center">
   <img src="assets/lax-glyph.svg" alt="@lax glyph logo" width="600"/>
 </p>
