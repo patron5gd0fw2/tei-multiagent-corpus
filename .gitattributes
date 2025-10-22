@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------------
+# Basic normalization for cross-platform consistency
+# ---------------------------------------------------------------------
+* text=auto eol=lf
+
+# ---------------------------------------------------------------------
+# XML and TEI files
+# ---------------------------------------------------------------------
+*.xml text diff
+*.xsd text diff
+*.odd text diff
+*.rng text diff
+*.dtd text diff
+
+# ---------------------------------------------------------------------
+# Markdown, text, and documentation
+# ---------------------------------------------------------------------
+*.md text diff
+*.txt text diff
+*.json text diff
+
+# ---------------------------------------------------------------------
+# Binary files (no diffing or auto-text conversion)
+# ---------------------------------------------------------------------
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.pdf binary
+
+# ---------------------------------------------------------------------
+# Optional: linguistically-aware diff (GitHub can display these nicely)
+# ---------------------------------------------------------------------
+*.xml linguist-language=XML
+*.odd linguist-language=TEI
