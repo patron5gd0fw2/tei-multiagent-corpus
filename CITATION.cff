@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this TEI corpus in your research, please cite it as below."
+title: "TEI Multi-Agent Corpus"
+authors:
+  - family-names: "patron5gd0fw2"
+    given-names: ""
+    affiliation: "Independent researcher"
+    orcid: ""
+  - name: "Gemini"
+    affiliation: "Google"
+  - name: "Claude"
+    affiliation: "Anthropic"
+  - name: "ChatGPT"
+    affiliation: "OpenAI"
+abstract: >
+  An experimental TEI-encoded corpus documenting structured multi-agent dialogue between a human author and several AI systems (Gemini, Claude, and ChatGPT). The project explores schema flexibility through a custom `lax` attribute and demonstrates TEI as a framework for recording, encoding, and studying human–AI conversation.
+keywords:
+  - TEI
+  - XML
+  - digital humanities
+  - corpus linguistics
+  - AI conversation
+  - schema
+  - encoding
+  - markup
+license: "CC-BY-4.0"
+repository-code: "https://github.com/patron5gd0fw2/tei-multiagent-corpus"
+version: "1.0.0"
+doi: "10.5281/zenodo.xxxxxxx"   # Replace this with your real DOI once Zenodo assigns it
+date-released: "2025-10-22"
