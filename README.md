@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/lax-glyph.svg" alt="@lax glyph logo" width="600"/>
+</p>
+
 # tei-multiagent-corpus
 A TEI-encoded multi-agent conversation corpus exploring schema flexibility using the custom `@lax` attribute.
 
