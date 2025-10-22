@@ -1,0 +1,22 @@
+# Ignore backup and temporary files
+*.bak
+*.tmp
+*~
+*.swp
+
+# macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE files
+.vscode/
+.idea/
+
+# Output or generated files
+/output/
+/temp/
+/build/
+/archives/
+
+# Logs
+*.log
