@@ -2,8 +2,6 @@
 
 ---
 
----
-
 Based on available estimates and reported data from 2025, the number of people who chat with Gemini every day is estimated to be around **35 million to 45 million Daily Active Users (DAU)**.
 
 Here are a few specific data points that have been reported:
@@ -15,11 +13,7 @@ It's important to note that these figures are often estimates from third parties
 
 ---
 
----
-
 > I want to create a customization of TEI. I like TEI exactly as it is except for one thing. I would like any element to have the option to be empty (minOccurs="0"), or to minimize content so as to not include subelements that would have been mandatory (minOccurs="1"). How would you suggest I go about doing this?
-
----
 
 ---
 
@@ -99,3 +93,45 @@ The real-world enforcement of your "lax content" policy happens in the **process
 2.  **If `@lax="minimal"`:** Your processing scripts would look for an essential text node or minimal subelement (like a `<ref>` or a simple string) and ignore any missing mandatory subelements, again proceeding as valid.
 
 This approach maintains the integrity of the original TEI schema (which is essential for TEI tool compatibility) while giving your documents the structural flexibility you require via an explicit, machine-readable attribute.
+
+---
+
+> Would @lax="minimal" actually suffice either way? If an element is empty, would that still be technically correct with the "minimal" value?
+
+---
+
+That's a very insightful follow-up question that gets to the heart of how you want to define "minimal" content.
+
+The short answer is: **No, the `@lax="minimal"` value would likely not cover the "empty" case, and you would need to use both values or refine your definition of "minimal."**
+
+Here is a breakdown of why, and how to define your attribute values based on your needs:
+
+### 1. The Distinction Between "Minimal" and "Empty"
+
+The original TEI content models are very precise.
+
+* **Empty:** An element with no content at all (no text, no child elements).
+* **Minimal:** An element with *some* content, even if it's just a single text node or a single allowed child element, but *not* the full mandatory set defined by the schema.
+
+| Scenario | `@lax` Value that applies | Why |
+| :--- | :--- | :--- |
+| **Original Problem 1:** Element must be empty (overriding `minOccurs="1"`). | **`@lax="empty"`** | This is explicit and clearly communicates the intent to override the content model entirely, resulting in no content. |
+| **Original Problem 2:** Element must have *some* content, but not the mandatory subelements. | **`@lax="minimal"`** | This communicates the intent to provide *just enough* content (e.g., a simple string) while suppressing mandatory complex subelements. |
+| **Your Question:** Element is empty, but you use `@lax="minimal"`. | ***Does not suffice.* / Needs clarification.** | In a processing pipeline, "minimal" implies looking for *something*. If the element is truly empty, the pipeline may fail, or it won't be clear if the empty state was intentional or an error. |
+
+### 2. Suggestion: Keep Both Values
+
+To be clear and robust in your policy and processing pipeline, it is best to keep both values as you originally designed them:
+
+* Use **`@lax="empty"`** when you want to signal to your processor: "Ignore the content model; this element must have NO content."
+    * *Example:* `<titleStmt lax="empty"/>`
+* Use **`@lax="minimal"`** when you want to signal: "Ignore the mandatory subelements; this element must have only a text string or one single, simple subelement (e.g., a simple `<name>`)."
+    * *Example:* `<p lax="minimal">A quick note.</p>` (instead of a `<p>` that might mandate a following `<note>` or `<head>`)
+
+### 3. Alternative: Redefine "Minimal" to Include "Empty"
+
+If you absolutely want a single value, you could redefine your single attribute value, say **`@lax="suppressed"`**, with a new policy:
+
+* **Policy:** If the element is marked `@lax="suppressed"`, the processor will validate it against a content model of `((#PCDATA | %phrase.content)*)`. The author is free to make it either empty or give it minimal content.
+
+However, this makes the author's intent less explicit for future maintainers. For the sake of **clarity and machine-readability**, the dual-value approach (`empty` vs. `minimal`) is technically superior for covering your two distinct use cases.
